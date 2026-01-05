@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: prenom-service
     ports:
-      - "8080:80"
+      - "8080:80"  
     environment:
       - SPRING_APPLICATION_NAME=prenom-service
       - SERVER_PORT=8080
@@ -25,13 +25,12 @@ services:
     environment:
       - SPRING_APPLICATION_NAME=rental-service
       - SERVER_PORT=8081
-      - PRENOM_SERVICE_URL=http://prenom-service:8080
+      - CUSTOMER_SERVICE_URL=http://prenom-service:80
     networks:
       - ingnum-network
     depends_on:
       - prenom-service
     restart: unless-stopped
-
 
 networks:
   ingnum-network:

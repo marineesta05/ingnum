@@ -1,9 +1,9 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+$name = isset($_GET['name']) ? $_GET['name'] : 'Unknown';
 
 $response = [
-    'name' => 'Marine',  
+    'name' => $name,  
     'service' => 'prenomService',
     'timestamp' => date('Y-m-d H:i:s')
 ];
