@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prenom-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prenomService
+  template:
+    metadata:
+      labels:
+        app: prenomService
+    spec:
+      containers:
+      - name: prenom-container
+        image: marineesta/nameservice
+        imagePullPolicy: Always
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rental-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rentalService
+  template:
+    metadata:
+      labels:
+        app: rentalService
+    spec:
+      containers:
+        - name: rental-container
+          image: marineesta/rentalservice
+          imagePullPolicy: Always
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: prenom-service
+spec:
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 80
+  type: NodePort
+  selector:
+    app: prenomService
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rental-service
+spec:
+  ports:
+    - name: http
+      targetPort: 8081  
+      port: 80
+  type: ClusterIP
+  selector:
+    app: rentalService

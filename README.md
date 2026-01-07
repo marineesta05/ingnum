@@ -66,3 +66,6 @@ Faire un push de l'image dans le Hub:
 docker push marineesta/rentalservice:latest
 ```
 
+# Kubernetes yml
+
+[https://img.sanishtech.com/u/12306dad774f783080cbc78c41c65a61.png]
