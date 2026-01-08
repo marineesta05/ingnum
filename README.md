@@ -69,3 +69,8 @@ docker push marineesta/rentalservice:latest
 # Kubernetes yml
 
 [https://img.sanishtech.com/u/12306dad774f783080cbc78c41c65a61.png]
+
+# Ingress
+[https://img.sanishtech.com/u/3993b2c4cf7fc52675ebab6fc3f1bc7e.png]
+
+[https://img.sanishtech.com/u/dd5d108369b3ea1ea492bed066c1927f.png]

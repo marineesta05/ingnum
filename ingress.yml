@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: ingnum.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ingress-service
+                port:
+                  number: 80
+
+          - path: /depl2
+            pathType: Prefix
+            backend:
+              service:
+                name: ingress2-service
+                port:
+                  number: 80
