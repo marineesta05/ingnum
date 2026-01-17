@@ -1,3 +1,4 @@
+# Service 1 : 
 ## 1.Installation
 La version Java JDK 21 etait deja installee sur ma machine.
 
@@ -66,11 +67,81 @@ Faire un push de l'image dans le Hub:
 docker push marineesta/rentalservice:latest
 ```
 
-# Kubernetes yml
+# Service 2
 
-[https://img.sanishtech.com/u/12306dad774f783080cbc78c41c65a61.png]
+## 1. Creer le dossier 
+A la racine du projet, creer le dossier prenomService
 
-# Ingress
-[https://img.sanishtech.com/u/3993b2c4cf7fc52675ebab6fc3f1bc7e.png]
+```bash
+mkdir prenomService
+cd prenomService
+```
+##  2. Creer le fichier php
+Dans le dossier index.php, creer un fichier index.php
 
-[https://img.sanishtech.com/u/dd5d108369b3ea1ea492bed066c1927f.png]
+```bash
+<?php
+header('Content-Type: application/json');
+$name = isset($_GET['name']) ? $_GET['name'] : 'Unknown';
+
+$response = [
+    'name' => $name,  
+    'service' => 'prenomService',
+    'timestamp' => date('Y-m-d H:i:s')
+];
+
+echo json_encode($response, JSON_PRETTY_PRINT);
+?>
+```
+
+### 3. Creation du fichier Dockerfile 
+Creer le fichier Dockerfile dans le dossier prenomService
+
+```bash
+FROM php:8.2-apache
+
+COPY index.php /var/www/html/
+
+RUN rm -f /var/www/html/index.html
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
+```
+
+## 4. Creation de l'image Docker
+Lancer la création de l’image Docker (toujours dans le dossier prenomService):
+
+```bash
+docker build –t nameservice .
+```
+
+## 5. Tester le programme avec Docker 
+
+```bash
+docker run –p 8082:8080 nameservice
+```
+
+Vérifier dans votre navigateur à l’adresse : 
+
+[http://localhost:8082]
+
+## 6. Publier l'image dans Docker Hub
+
+Se connecter au Docker Hub
+
+```bash
+docker login
+```
+
+Faire un tag de l'image :
+
+```bash
+docker tag nameesrvice marineesta/nameservice:latest
+```
+
+Faire un push de l'image dans le Hub:
+
+```bash
+docker push marineesta/nameservice:latest
+```
